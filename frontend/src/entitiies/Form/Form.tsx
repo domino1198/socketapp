@@ -1,5 +1,7 @@
 import React, {Dispatch, FC, SetStateAction} from 'react'
-import {Button, Grid, TextField} from "@mui/material";
+import {Grid} from "@mui/material";
+import Input from "../../shared/Input";
+import Button from "../../shared/Button";
 
 interface Props {
     message: string,
@@ -13,17 +15,14 @@ const Form: FC<Props> = ({message, setMessage, onSubmit}) => {
     return (
         <Grid alignItems={'center'} container columnGap={2}>
             <Grid item xs={3}>
-                <TextField value={message}
-                           fullWidth={true}
-                           onChange={(e) => setMessage(e.target.value)}
-                           placeholder={'Write message'}
-                           label="Messages"
-                           variant="outlined"
+                <Input
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                 />
             </Grid>
             <Grid item xs={1}>
-                <Button onClick={onSubmit} color={'primary'} variant={'contained'}>
-                    Submit
+                <Button onClick={onSubmit}>
+                    Отправить
                 </Button>
             </Grid>
         </Grid>

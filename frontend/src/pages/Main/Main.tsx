@@ -3,22 +3,17 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import {Grid} from "@mui/material";
-import Messages from "../../features/Messages";
-import AddMessage from "../../features/AddMessage";
+import Chat from "../../widgets/Chat";
+import Layout from "../../widgets/Layout";
 
 
 const Main = () => {
 
     return (
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <AddMessage/>
-            </Grid>
-            <Grid item xs={12}>
-                <Messages/>
-            </Grid>
-        </Grid>
+        <Layout>
+            <Chat/>
+        </Layout>
+
     );
 }
 

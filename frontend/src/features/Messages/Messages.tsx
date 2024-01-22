@@ -16,7 +16,6 @@ const Messages: FC = () => {
 
     useEffect(() => {
         function onPing(msg: string) {
-            console.log('msg: ', msg)
             setItems((prevState) => prevState.concat(msg))
         }
 
