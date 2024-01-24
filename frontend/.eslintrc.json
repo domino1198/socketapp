@@ -1,0 +1,70 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "plugins": [
+    "unused-imports"
+  ],
+  "rules": {
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "security/detect-object-injection": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "unused-imports/no-unused-imports": "warn",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "eqeqeq": "error",
+    "import/no-anonymous-default-export": 0,
+    "react/jsx-boolean-value": [
+      "warn",
+      "always"
+    ],
+    "react/jsx-curly-brace-presence": [
+      "warn",
+      {
+        "props": "never",
+        "children": "never"
+      }
+    ],
+    "padding-line-between-statements": [
+      "warn",
+      {
+        "blankLine": "always",
+        "prev": [
+          "block-like",
+          "if",
+          "multiline-var",
+          "multiline-let",
+          "multiline-const",
+          "debugger",
+          "return"
+        ],
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": [
+          "block-like",
+          "if",
+          "multiline-var",
+          "multiline-let",
+          "multiline-const",
+          "debugger",
+          "return"
+        ]
+      }
+    ]
+  }
+}
+
