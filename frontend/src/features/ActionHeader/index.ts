@@ -1,1 +1,1 @@
-export {default} from './ActionHeader'
+export { default } from './ActionHeader';

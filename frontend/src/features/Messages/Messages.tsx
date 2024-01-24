@@ -1,34 +1,31 @@
-import React, {FC, useEffect, useState} from 'react'
-import {socket} from "../../app/socket";
-import List from "../../entitiies/List";
+import React, { FC, useEffect, useState } from 'react';
+import { socket } from '../../app/socket';
+import List from '../../entitiies/List';
 
 const Messages: FC = () => {
+  const [items, setItems] = useState<string[]>([]);
 
-    const [items, setItems] = useState<string[]>([])
+  useEffect(() => {
+    socket.connect();
 
-    useEffect(() => {
-        socket.connect();
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
-        return () => {
-            socket.disconnect()
-        }
-    }, []);
+  useEffect(() => {
+    function onPing(msg: string) {
+      setItems((prevState) => prevState.concat(msg));
+    }
 
-    useEffect(() => {
-        function onPing(msg: string) {
-            setItems((prevState) => prevState.concat(msg))
-        }
+    socket.on('messageResponse', onPing);
 
-        socket.on('messageResponse', onPing);
+    return () => {
+      socket.off('messageResponse', onPing);
+    };
+  }, [items]);
 
-        return () => {
-            socket.off('messageResponse', onPing);
-        }
+  return <List items={items} />;
+};
 
-    }, [items]);
-
-
-    return (<List items={items}/>)
-}
-
-export default Messages
+export default Messages;

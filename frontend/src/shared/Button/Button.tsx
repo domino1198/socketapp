@@ -1,17 +1,16 @@
-import React, {FC, ReactNode} from 'react'
-import {Button as ButtonMUI, ButtonProps} from "@mui/material";
+import React, { FC, ReactNode } from 'react';
+import { Button as ButtonMUI, ButtonProps } from '@mui/material';
 
 interface Props extends ButtonProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
-const Button: FC<Props> = ({children, ...props}) => {
+const Button: FC<Props> = ({ children, ...props }) => {
+  return (
+    <ButtonMUI color="primary" variant="contained" {...props}>
+      {children}
+    </ButtonMUI>
+  );
+};
 
-    return (
-        <ButtonMUI color={'primary'} variant={'contained'} {...props}>
-            {children}
-        </ButtonMUI>
-    )
-}
-
-export default Button
+export default Button;

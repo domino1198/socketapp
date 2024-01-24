@@ -38,13 +38,11 @@
     "dev": "concurrently \"npm run start-backend\" \"npm run start-client",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "codestyle:fix": "npm-run-all codestyle:prettier codestyle:eslint",
+    "codestyle:prettier": "prettier --write src/**/*.{ts,tsx}",
+    "codestyle:eslint": "eslint . --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config .prettierrc"
   },
   "browserslist": {
     "production": [
@@ -58,5 +56,11 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "eslint-plugin-security": "^1.7.1",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.2.4"
+  }
 }

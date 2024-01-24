@@ -1,1 +1,1 @@
-export {default} from './ActionUserMenu'
+export { default } from './ActionUserMenu';

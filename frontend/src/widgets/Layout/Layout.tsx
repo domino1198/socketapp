@@ -1,28 +1,27 @@
-import React, {FC, ReactNode} from 'react'
-import Header from "../Header";
-import Container from "@mui/material/Container";
+import React, { FC, ReactNode } from 'react';
+import Header from '../Header';
+import Container from '@mui/material/Container';
 
 interface Props {
-    children: ReactNode
+  children: ReactNode;
 }
 
-const Layout: FC<Props> = ({children}) => {
+const Layout: FC<Props> = ({ children }) => {
+  return (
+    <>
+      <Header />
+      <Container
+        maxWidth="xl"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          paddingBlock: 32,
+        }}
+      >
+        {children}
+      </Container>
+    </>
+  );
+};
 
-    return (
-        <>
-            <Header/>
-            <Container
-                maxWidth={'xl'}
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    paddingBlock: 32
-                }}>
-                {children}
-            </Container>
-
-        </>
-    )
-}
-
-export default Layout
+export default Layout;
