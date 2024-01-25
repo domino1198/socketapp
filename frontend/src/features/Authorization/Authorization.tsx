@@ -2,13 +2,8 @@ import React, { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import AuthForm from '../../entitiies/AuthForm';
 import { IFormInput } from './types';
-import axios from 'axios';
 
-interface Props {
-  props?: any;
-}
-
-const SignIn: FC<Props> = ({ props }) => {
+const Authorization: FC = () => {
   const {
     control,
     handleSubmit,
@@ -22,7 +17,6 @@ const SignIn: FC<Props> = ({ props }) => {
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
-      console.log(await axios.post('/api/users/create-user', data));
     } catch (e) {
       console.log(e);
     }
@@ -38,4 +32,4 @@ const SignIn: FC<Props> = ({ props }) => {
   );
 };
 
-export default SignIn;
+export default Authorization;

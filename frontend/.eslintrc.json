@@ -23,6 +23,7 @@
     "unused-imports/no-unused-imports": "warn",
     "@typescript-eslint/ban-ts-comment": "off",
     "react-hooks/exhaustive-deps": "off",
+    "import/no-named-as-default": "off",
     "eqeqeq": "error",
     "import/no-anonymous-default-export": 0,
     "react/jsx-boolean-value": [

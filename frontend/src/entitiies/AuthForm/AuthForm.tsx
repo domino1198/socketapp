@@ -1,5 +1,11 @@
 import React, { BaseSyntheticEvent, FC } from 'react';
 import {
+  ButtonFormAuthStyled,
+  ContainerButtonStyled,
+  FormAuthStyled,
+} from './styled';
+import { Grid } from '@mui/material';
+import {
   Control,
   Controller,
   DeepRequired,
@@ -8,9 +14,9 @@ import {
   SubmitErrorHandler,
   SubmitHandler,
 } from 'react-hook-form';
-import Input from '../../shared/Input';
-import Button from '../../shared/Button';
-import { IFormInput } from '../../features/SignIn/types';
+import FormControl from '../../shared/FormControl';
+import { Link } from 'react-router-dom';
+import { IFormInput } from '../../features/Authorization/types';
 
 interface Props {
   onSubmit: SubmitHandler<IFormInput>;
@@ -26,42 +32,59 @@ interface Props {
 
 const AuthForm: FC<Props> = ({ onSubmit, control, handleSubmit, errors }) => {
   return (
-    <form
-      style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 350 }}
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <Controller
-        name="username"
-        control={control}
-        rules={{ required: 'Логин не должен быть пустым' }}
-        render={({ field }) => (
-          <Input
-            {...field}
-            error={!!errors.username}
-            helperText={errors.username?.message}
-            placeholder="Введите логин"
-            label="Логин"
+    <FormAuthStyled onSubmit={handleSubmit(onSubmit)}>
+      <Grid alignItems="center" container={true} rowSpacing={4}>
+        <Grid item={true} xs={12}>
+          <Controller
+            name="username"
+            control={control}
+            rules={{ required: 'Логин не должен быть пустым' }}
+            render={({ field }) => (
+              <FormControl
+                {...field}
+                ref={undefined}
+                error={!!errors.username}
+                textError={errors.username?.message}
+                placeholder="Введите логин"
+                label="Логин"
+              />
+            )}
           />
-        )}
-      />
-      <Controller
-        name="password"
-        control={control}
-        rules={{ required: 'Пароль не должен быть пустым' }}
-        render={({ field }) => (
-          <Input
-            {...field}
-            error={!!errors.password}
-            helperText={errors.password?.message}
-            placeholder="Введите пароль"
-            label="Пароль"
+        </Grid>
+        <Grid item={true} xs={12}>
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: 'Пароль не должен быть пустым' }}
+            render={({ field }) => (
+              <FormControl
+                {...field}
+                ref={undefined}
+                type="password"
+                error={!!errors.password}
+                textError={errors.password?.message}
+                placeholder="Введите пароль"
+                label="Пароль"
+              />
+            )}
           />
-        )}
-      />
-      <Button style={{ marginTop: 32 }} type="submit">
-        Авторизоваться
-      </Button>
-    </form>
+        </Grid>
+        <ContainerButtonStyled container={true} item={true} columnSpacing={1}>
+          <Grid item={true} xs={6}>
+            <ButtonFormAuthStyled type="submit">
+              Авторизоваться
+            </ButtonFormAuthStyled>
+          </Grid>
+          <Grid item={true} xs={6}>
+            <Link to="/auth/sign-up">
+              <ButtonFormAuthStyled variant="outlined">
+                Зарегестрироваться
+              </ButtonFormAuthStyled>
+            </Link>
+          </Grid>
+        </ContainerButtonStyled>
+      </Grid>
+    </FormAuthStyled>
   );
 };
 
