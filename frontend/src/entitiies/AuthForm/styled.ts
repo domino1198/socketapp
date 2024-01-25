@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from '../../shared/Button';
+import Button from '../../shared/ui/Button';
 import { Grid } from '@mui/material';
 
 export const FormAuthStyled = styled.form`

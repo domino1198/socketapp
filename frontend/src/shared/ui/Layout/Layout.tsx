@@ -1,15 +1,16 @@
 import React, { FC, ReactNode } from 'react';
-import Header from '../Header';
 import Container from '@mui/material/Container';
+
 
 interface Props {
   children: ReactNode;
+  header?:ReactNode
 }
 
-const Layout: FC<Props> = ({ children }) => {
+const Layout: FC<Props> = ({ children,header }) => {
   return (
     <>
-      <Header />
+      {header}
       <Container
         maxWidth="xl"
         style={{
@@ -24,4 +25,5 @@ const Layout: FC<Props> = ({ children }) => {
   );
 };
 
-export default Layout;
+
+export default Layout

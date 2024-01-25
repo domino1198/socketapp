@@ -1,7 +1,7 @@
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import { Grid } from '@mui/material';
-import Input from '../../shared/Input';
-import Button from '../../shared/Button';
+import Input from '../../shared/ui/Input';
+import Button from '../../shared/ui/Button';
 
 interface Props {
   message: string;

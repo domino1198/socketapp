@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { socket } from '../../app/socket';
 import List from '../../entitiies/List';
 
-const Messages: FC = () => {
+const GetMessages: FC = () => {
   const [items, setItems] = useState<string[]>([]);
 
   useEffect(() => {
@@ -28,4 +28,4 @@ const Messages: FC = () => {
   return <List items={items} />;
 };
 
-export default Messages;
+export default GetMessages;

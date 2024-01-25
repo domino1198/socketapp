@@ -15,7 +15,7 @@ import {
   FormAuthStyled,
 } from '../AuthForm/styled';
 import { Link } from 'react-router-dom';
-import FormControl from '../../shared/FormControl';
+import FormControl from '../../shared/ui/FormControl';
 import { RegistrationUser } from '../../features/Registration/types';
 
 interface Props {

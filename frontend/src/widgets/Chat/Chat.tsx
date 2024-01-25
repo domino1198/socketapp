@@ -1,23 +1,20 @@
-import React, { FC } from 'react';
 import { Grid } from '@mui/material';
 import AddMessage from '../../features/AddMessage';
-import Messages from '../../features/Messages';
+import GetMessages from '../../features/GetMessages';
+import React from 'react';
 
-interface Props {
-  props?: any;
-}
 
-const Chat: FC<Props> = ({ props }) => {
+const Chat = () => {
   return (
     <Grid container={true} spacing={2}>
       <Grid item={true} xs={12}>
         <AddMessage />
       </Grid>
       <Grid item={true} xs={12}>
-        <Messages />
+        <GetMessages />
       </Grid>
     </Grid>
   );
 };
 
-export default Chat;
+export default Chat

@@ -1,24 +1,26 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import { ItemMenu } from '../../shared/ui/Menu/types';
+import React, { FC, useState } from 'react';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-import Menu from '../../shared/Menu';
-import { settings } from '../../widgets/Header/data';
+import Menu from '../../shared/ui/Menu';
 
 interface Props {
-  handleOpenUserMenu: (event: React.MouseEvent<HTMLElement>) => void;
-  handleCloseUserMenu: () => void;
-  anchorElUser: null | HTMLElement;
-  setAnchorElUser: Dispatch<SetStateAction<null | HTMLElement>>;
+  items:ItemMenu[]
 }
 
-const UserMenu: FC<Props> = ({
-  handleOpenUserMenu,
-  handleCloseUserMenu,
-  setAnchorElUser,
-  anchorElUser,
-}) => {
+const UserMenu: FC<Props> = ({items}) => {
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
@@ -27,7 +29,7 @@ const UserMenu: FC<Props> = ({
         </IconButton>
       </Tooltip>
       <Menu
-        items={settings}
+        items={items}
         sx={{ mt: '45px' }}
         id="menu-appbar"
         anchorEl={anchorElUser}
@@ -38,4 +40,4 @@ const UserMenu: FC<Props> = ({
   );
 };
 
-export default UserMenu;
+export default UserMenu

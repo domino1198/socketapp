@@ -4,7 +4,7 @@ import {
   ContainerButtonStyled,
   FormAuthStyled,
 } from './styled';
-import { Grid } from '@mui/material';
+import { CircularProgress, Grid } from '@mui/material';
 import {
   Control,
   Controller,
@@ -14,13 +14,14 @@ import {
   SubmitErrorHandler,
   SubmitHandler,
 } from 'react-hook-form';
-import FormControl from '../../shared/FormControl';
+import FormControl from '../../shared/ui/FormControl';
 import { Link } from 'react-router-dom';
 import { IFormInput } from '../../features/Authorization/types';
 
 interface Props {
   onSubmit: SubmitHandler<IFormInput>;
   control: Control<IFormInput, any>;
+  isLoading: boolean;
   errors: Partial<FieldErrorsImpl<DeepRequired<IFormInput>>> & {
     root?: Record<string, GlobalError> & GlobalError;
   };
@@ -30,7 +31,13 @@ interface Props {
   ) => (e?: BaseSyntheticEvent) => Promise<void>;
 }
 
-const AuthForm: FC<Props> = ({ onSubmit, control, handleSubmit, errors }) => {
+const AuthForm: FC<Props> = ({
+  onSubmit,
+  control,
+  isLoading,
+  handleSubmit,
+  errors,
+}) => {
   return (
     <FormAuthStyled onSubmit={handleSubmit(onSubmit)}>
       <Grid alignItems="center" container={true} rowSpacing={4}>
@@ -72,7 +79,7 @@ const AuthForm: FC<Props> = ({ onSubmit, control, handleSubmit, errors }) => {
         <ContainerButtonStyled container={true} item={true} columnSpacing={1}>
           <Grid item={true} xs={6}>
             <ButtonFormAuthStyled type="submit">
-              Авторизоваться
+              {isLoading ? <CircularProgress size={24.5} /> : 'Авторизоваться'}
             </ButtonFormAuthStyled>
           </Grid>
           <Grid item={true} xs={6}>
