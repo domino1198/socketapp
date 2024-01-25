@@ -6,6 +6,7 @@ import swaggerUI from "swagger-ui-express";
 import swDocument from "./openapi";
 
 import database from "./database";
+import { LoginRouter } from "./routes/authorization";
 
 const app = express();
 const server = createServer(app);
@@ -25,6 +26,8 @@ app.use(
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swDocument));
 
 app.use("/api/users", UserRouter);
+
+app.use("/api/auth", LoginRouter);
 
 io.on("connection", (socket) => {
   socket.on("chat message", (msg) => {

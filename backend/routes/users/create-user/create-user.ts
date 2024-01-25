@@ -1,36 +1,43 @@
-import schema, { joiSchema } from "./create-user.spec/schema";
+import schema from "./create-user.spec/schema";
 import UserController from "../../../database/user/user";
 import { Router } from "express";
 
 export const createUser = Router();
 export const swCreateUser = {
-  summary: "создать пользователя",
-  tags: ["login"],
-  parameters: [
-    {
-      name: "key",
-      in: "header",
-      schema: {
-        type: "string",
-      },
-      required: true,
-    },
-  ],
+  summary: "Cоздать пользователя",
+  tags: ["userController"],
   requestBody: {
     content: {
       "application/json": {
         schema: {
-          ...schema,
+          ...schema.schemaRequest,
         },
       },
     },
   },
   responses: {
     "200": {
-      description: "Done",
+      content: {
+        "application/json": {
+          schema: {
+            ...schema.schemaResponse,
+          },
+        },
+      },
     },
-    default: {
-      description: "Error message",
+    "401": {
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              message: {
+                example: "user with username *** already exist",
+              },
+            },
+          },
+        },
+      },
     },
   },
 };
@@ -38,7 +45,7 @@ export const swCreateUser = {
 createUser.post("/create-user", (req, res) => {
   (async () => {
     try {
-      await joiSchema.validateAsync(req.body);
+      await schema.schemaRequest.validateAsync(req.body);
       const user = await UserController.getUserByUsername(req.body.username);
 
       if (user?.length)
@@ -46,6 +53,10 @@ createUser.post("/create-user", (req, res) => {
           message: `user with username ${user[0].username} already exist`,
         });
       const result = await UserController.onCreateUser(req.body);
+      await schema.schemaResponse.validateAsync({
+        ...result,
+        password: undefined,
+      });
       res.send({ ...result, password: undefined });
     } catch (e) {
       console.error(e);
