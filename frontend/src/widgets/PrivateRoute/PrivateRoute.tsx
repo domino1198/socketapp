@@ -5,8 +5,7 @@ interface Props {
 }
 
 const PrivateRoute: FC<Props> = ({ props }) => {
-
-  return (<div>TSX component</div>);
+  return <div>TSX component</div>;
 };
 
 export default PrivateRoute;

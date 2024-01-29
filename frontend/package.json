@@ -32,6 +32,7 @@
     "socket.io-client": "^4.7.2",
     "sort-by": "^1.2.0",
     "styled-components": "^6.1.8",
+    "swagger-typescript-api": "^13.0.3",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -45,6 +46,7 @@
     "codestyle:fix": "npm-run-all codestyle:prettier codestyle:eslint",
     "codestyle:prettier": "prettier --write src/**/*.{ts,tsx}",
     "codestyle:eslint": "eslint . --fix",
+    "generate:swagger": "swagger-typescript-api --axios --modular --module-name-first-tag --unwrap-response-data -p http://localhost:5000/v1/api-docs/swagger.json -o ./src/shared/api",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config .prettierrc"
   },
   "browserslist": {
