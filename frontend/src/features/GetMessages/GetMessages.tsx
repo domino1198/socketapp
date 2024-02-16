@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
-import { socket } from '../../app/socket';
 import List from '../../entitiies/List';
+import api from '../../shared/api';
+
+const { socket } = api;
 
 const GetMessages: FC = () => {
   const [items, setItems] = useState<string[]>([]);

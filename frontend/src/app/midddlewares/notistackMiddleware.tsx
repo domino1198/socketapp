@@ -5,6 +5,6 @@ interface Props {
   children: ReactNode;
 }
 
-export const NotistackMiddleWare: FC<Props> = ({ children }) => {
+export const NotistackMiddleware: FC<Props> = ({ children }) => {
   return <SnackbarProvider maxSnack={3}>{children}</SnackbarProvider>;
 };

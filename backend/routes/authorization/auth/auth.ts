@@ -10,6 +10,7 @@ export const AuthRouter = Router();
 export const swLogin = {
   summary: "Проверка валидности токена пользователя",
   tags: ["authController"],
+  operationId: "loginUser",
   responses: {
     "200": {
       content: {
@@ -26,6 +27,7 @@ export const swLogin = {
 export const swAuth = {
   summary: "Авторизация пользователя",
   tags: ["authController"],
+  operationId: "authUser",
   requestBody: {
     content: {
       "application/json": {
@@ -51,9 +53,7 @@ export const swAuth = {
 AuthRouter.post("/", (req, res) => {
   (async () => {
     try {
-      await schema.schemaRequestAuth.validateAsync(req.body);
-
-      const result = await UserController.getUserByUsername(req.body);
+      const result = await UserController.getUserByUsername(req.body.username);
 
       if (!result?.length)
         res.status(403).send({
@@ -83,14 +83,6 @@ AuthRouter.post("/", (req, res) => {
           }
         );
 
-        await schema.schemaResponse.validateAsync({
-          user: {
-            ...user,
-            password: undefined,
-          },
-          accessToken: token,
-        });
-
         res.status(200).send({
           user: {
             ...user,
@@ -107,13 +99,6 @@ AuthRouter.post("/", (req, res) => {
 
 AuthRouter.get("/", verifyToken, (req: any, res) => {
   (async () => {
-    await schema.schemaResponse.validateAsync({
-      user: {
-        ...req.user,
-        password: undefined,
-      },
-      accessToken: req.token,
-    });
     res.status(200).send({
       user: {
         ...req.user,

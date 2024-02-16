@@ -1,8 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import Main from '../pages/Main';
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
-import { App } from './App';
+import Main from '../../pages/Main';
+import SignIn from '../../pages/SignIn';
+import SignUp from '../../pages/SignUp';
+import { App } from '../App';
+import PrivateRoute from '../../widgets/PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +12,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/main',
-        element: <Main />,
+        element: (
+          <PrivateRoute>
+            <Main />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/auth',

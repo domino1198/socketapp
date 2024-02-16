@@ -1,6 +1,8 @@
 import React, { FC, useState } from 'react';
-import { socket } from '../../app/socket';
 import Form from '../../entitiies/Form';
+import api from '../../shared/api';
+
+const { socket } = api;
 
 const AddMessage: FC = () => {
   const [message, setMessage] = useState('');

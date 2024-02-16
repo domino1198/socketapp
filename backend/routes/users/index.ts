@@ -2,7 +2,7 @@ import { createUser, swCreateUser } from "./create-user/create-user";
 import { getUsers, swGetUsers } from "./get-users/get-users";
 
 export const swUserRoute = {
-  "/users/": {
+  "/users": {
     get: {
       ...swGetUsers,
     },

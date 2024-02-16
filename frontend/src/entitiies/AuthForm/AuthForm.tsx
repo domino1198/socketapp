@@ -39,7 +39,7 @@ const AuthForm: FC<Props> = ({
   errors,
 }) => {
   return (
-    <FormAuthStyled onSubmit={handleSubmit(onSubmit)}>
+    <FormAuthStyled autoComplete="on" onSubmit={handleSubmit(onSubmit)}>
       <Grid alignItems="center" container={true} rowSpacing={4}>
         <Grid item={true} xs={12}>
           <Controller

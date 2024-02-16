@@ -5,6 +5,7 @@ import { Router } from "express";
 export const createUser = Router();
 export const swCreateUser = {
   summary: "Cоздать пользователя",
+  operationId: "createUser",
   tags: ["userController"],
   requestBody: {
     content: {
@@ -45,7 +46,6 @@ export const swCreateUser = {
 createUser.post("/create-user", (req, res) => {
   (async () => {
     try {
-      await schema.schemaRequest.validateAsync(req.body);
       const user = await UserController.getUserByUsername(req.body.username);
 
       if (user?.length)
@@ -53,10 +53,6 @@ createUser.post("/create-user", (req, res) => {
           message: `user with username ${user[0].username} already exist`,
         });
       const result = await UserController.onCreateUser(req.body);
-      await schema.schemaResponse.validateAsync({
-        ...result,
-        password: undefined,
-      });
       res.send({ ...result, password: undefined });
     } catch (e) {
       console.error(e);

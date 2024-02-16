@@ -22,7 +22,7 @@ const UserController = {
       return {
         id,
         username: request.username,
-        password: bcrypt.hashSync(request.password, 8),
+        password: user[2],
         firstName: request.firstName,
         lastName: request.lastName,
       } as RequestCreateUser;

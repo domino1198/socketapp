@@ -22,8 +22,8 @@ app.use(
     extended: true,
   })
 );
-app.get("/v1/api-docs/swagger.json", (req, res) => res.json(swDocument));
-app.use("/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swDocument));
+app.get("/api-docs/swagger.json", (req, res) => res.json(swDocument));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swDocument));
 
 app.use("/api/users", UserRouter);
 

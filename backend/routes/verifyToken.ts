@@ -19,8 +19,9 @@ const verifyToken = (
         if (err) req.user = undefined;
         (async () => {
           try {
-            req.user = await UserController.getUserById(decode);
-            req.accessToken = decode;
+            req.user = await UserController.getUserById(decode.id);
+            req.accessToken = req.headers.authorization.split(" ")[1];
+
             if (!req.user)
               res.status(403).send({
                 message: "Invalid JWT token",

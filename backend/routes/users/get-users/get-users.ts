@@ -7,6 +7,7 @@ export const getUsers = Router();
 
 export const swGetUsers = {
   summary: "Получить всех пользователей",
+  operationId: "getUsers",
   tags: ["userController"],
   responses: {
     "200": {
@@ -25,7 +26,6 @@ getUsers.get("/", verifyToken, (req, res) => {
   (async () => {
     try {
       const result = await UserController.getUsers();
-      await schema.schemaResponse.validateAsync(result);
       res.send(result);
     } catch (e) {
       console.error(e);

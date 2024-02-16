@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const ReactQueryMiddleWare: FC<Props> = ({ children }) => {
+export const ReactQueryMiddleware: FC<Props> = ({ children }) => {
   const queryClient = new QueryClient();
 
   return (

@@ -3,7 +3,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import AuthForm from '../../entitiies/AuthForm';
 import { IFormInput } from './types';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import api from '../../shared/api';
+import { useNavigate } from 'react-router-dom';
+
+const {
+  services: { authService },
+} = api;
 
 const Authorization: FC = () => {
   const {
@@ -18,12 +23,15 @@ const Authorization: FC = () => {
     },
   });
 
+  const navigate = useNavigate();
+
   const { mutate: login, isPending } = useMutation({
     mutationFn: (data: IFormInput) => {
-      return axios.post('/api/users/login', data);
+      return authService().authUser(data);
     },
-    onSuccess: ({ data }) => {
-      localStorage.setItem('accessToken',data.accessToken);
+    onSuccess: (data) => {
+      localStorage.setItem('accessToken', data?.accessToken ?? '');
+      navigate('/main');
     },
     onError: (error: any) => {
       setError('username', {

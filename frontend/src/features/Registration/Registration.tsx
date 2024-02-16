@@ -1,11 +1,16 @@
 import React, { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import axios from 'axios';
 import { RegistrationUser } from './types';
 import RegistrationForm from '../../entitiies/RegistrationForm';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { useMutation } from '@tanstack/react-query';
+import { SignUpRequest } from '../../shared/api/rest/controllers/data-contracts';
+import api from '../../shared/api';
+
+const {
+  services: { userService },
+} = api;
 
 const Registration: FC = () => {
   const navigate = useNavigate();
@@ -72,12 +77,12 @@ const Registration: FC = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const { mutate: signUp, isPending } = useMutation({
-    mutationFn: (data: RegistrationUser) => {
-      return axios.post('/api/users/create-user', data);
+    mutationFn: (data: SignUpRequest) => {
+      return userService(false).createUser(data);
     },
     onSuccess: (data) => {
       enqueueSnackbar(
-        `Пользователь ${data.data.username} успешно зарегестрирован!`,
+        `Пользователь ${data.username} успешно зарегестрирован!`,
         { variant: 'success' }
       );
       navigate('/auth/sign-in');
