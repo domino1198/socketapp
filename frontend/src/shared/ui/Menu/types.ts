@@ -1,5 +1,6 @@
 export type ItemMenu = {
-  action: () => void;
+  action?: () => void;
   title: string;
   id: string;
+  link?: string;
 };

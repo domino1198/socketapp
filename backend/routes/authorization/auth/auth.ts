@@ -55,12 +55,12 @@ AuthRouter.post("/", (req, res) => {
     try {
       const result = await UserController.getUserByUsername(req.body.username);
 
-      if (!result?.length)
+      if (!result)
         res.status(403).send({
           message: "User is not found!",
         });
       else {
-        const user = result[0];
+        const user = result;
 
         const passwordIsValid = bcrypt.compareSync(
           req.body.password,

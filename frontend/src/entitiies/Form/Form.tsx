@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import React, { Dispatch, FC, memo, SetStateAction } from 'react';
 import { Grid } from '@mui/material';
 import Input from '../../shared/ui/Input';
 import Button from '../../shared/ui/Button';
@@ -22,4 +22,4 @@ const Form: FC<Props> = ({ message, setMessage, onSubmit }) => {
   );
 };
 
-export default Form;
+export default memo(Form);

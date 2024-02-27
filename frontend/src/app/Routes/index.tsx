@@ -1,11 +1,16 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import Main from '../../pages/Main';
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 import SignIn from '../../pages/SignIn';
 import SignUp from '../../pages/SignUp';
 import { App } from '../App';
 import PrivateRoute from '../../widgets/PrivateRoute';
+import Chats from '../../pages/Chats';
+import Main from '../../pages/Main';
 
 export const router = createBrowserRouter([
+  {
+    path: '*',
+    element: <Navigate to="/main" />,
+  },
   {
     path: '/',
     element: <App />,
@@ -14,9 +19,19 @@ export const router = createBrowserRouter([
         path: '/main',
         element: (
           <PrivateRoute>
-            <Main />
+            <Outlet />
           </PrivateRoute>
         ),
+        children: [
+          {
+            path: '/main',
+            element: <Main />,
+          },
+          {
+            path: '/main/chats',
+            element: <Chats />,
+          },
+        ],
       },
       {
         path: '/auth',
@@ -31,9 +46,5 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
     ],
-  },
-  {
-    path: '*',
-    element: <Navigate to="/" />,
   },
 ]);

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { TextField } from '@mui/material';
 import { TextFieldProps } from '@mui/material/TextField/TextField';
 
@@ -15,4 +15,4 @@ const Input: FC<TextFieldProps> = ({ ...props }) => {
   );
 };
 
-export default Input;
+export default memo(Input);

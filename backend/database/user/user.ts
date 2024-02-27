@@ -40,16 +40,6 @@ const UserController = {
     } catch (err) {
       console.error(err);
     }
-
-    return connection
-      .promise()
-      .query(sql)
-      .then((result) => {
-        return result;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
   },
 
   getUserByUsername: async (username: string) => {
@@ -57,7 +47,7 @@ const UserController = {
     const values = [username];
     try {
       const res = await connection.promise().query<User[]>(sql, values);
-      return res[0];
+      return res[0][0];
     } catch (err) {
       console.error(err);
     }

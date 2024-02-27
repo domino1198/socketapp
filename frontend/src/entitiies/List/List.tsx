@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { List as ListMUI, ListItem, ListItemText } from '@mui/material';
 
 interface Props {
@@ -17,4 +17,4 @@ const List: FC<Props> = ({ items }) => {
   );
 };
 
-export default List;
+export default memo(List);

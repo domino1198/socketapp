@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import { Menu as MenuMUI, MenuProps } from '@mui/material';
@@ -34,4 +34,4 @@ const Menu: FC<Props> = ({ items, ...props }) => {
   );
 };
 
-export default Menu;
+export default memo(Menu);

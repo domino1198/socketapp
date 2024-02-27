@@ -1,16 +1,16 @@
-import { ItemMenu } from '../../shared/ui/Menu/types';
+import { ItemMenu } from '../../../../shared/ui/Menu/types';
 import React, { FC, useState } from 'react';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-import Menu from '../../shared/ui/Menu';
+import Menu from '../../../../shared/ui/Menu';
 
 interface Props {
-  items:ItemMenu[]
+  items: ItemMenu[];
 }
 
-const UserMenu: FC<Props> = ({items}) => {
+const UserMenu: FC<Props> = ({ items }) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -23,11 +23,9 @@ const UserMenu: FC<Props> = ({items}) => {
 
   return (
     <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title="Open settings">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-        </IconButton>
-      </Tooltip>
+      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+      </IconButton>
       <Menu
         items={items}
         sx={{ mt: '45px' }}
@@ -40,4 +38,4 @@ const UserMenu: FC<Props> = ({items}) => {
   );
 };
 
-export default UserMenu
+export default UserMenu;

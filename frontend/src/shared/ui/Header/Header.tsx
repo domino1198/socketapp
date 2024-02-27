@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, memo, ReactNode } from 'react';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '../Menu';
+import { StyledLink } from '../../../entitiies/Page/styled';
 
 interface Props {
   rightItems?: ReactNode;
@@ -17,9 +18,8 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ leftItems = [], rightItems }) => {
-
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null,
+    null
   );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -34,34 +34,45 @@ const Header: FC<Props> = ({ leftItems = [], rightItems }) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters={true}>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap={true}
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-
+          <StyledLink to="/main">
+            <AdbIcon
+              sx={{
+                display: { xs: 'none', md: 'flex' },
+                mr: 1,
+                color: 'inherit',
+              }}
+            />
+            <Typography
+              variant="h6"
+              noWrap={true}
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              LOGO
+            </Typography>
+          </StyledLink>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {(leftItems ?? []).map((page) => (
-              <Button
-                key={page.id}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page.title}
-              </Button>
+              <StyledLink key={page.id} to={page.link ?? '/'}>
+                <Button
+                  onClick={!page.link ? page.action : undefined}
+                  sx={{
+                    my: 2,
+                    color: 'inherit',
+                    display: 'block',
+                    textDecoration: 'none',
+                  }}
+                >
+                  {page.title}
+                </Button>
+              </StyledLink>
             ))}
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -109,5 +120,4 @@ const Header: FC<Props> = ({ leftItems = [], rightItems }) => {
   );
 };
 
-
-export default Header;
+export default memo(Header);

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import {
   FormHelperText,
   InputAdornment,
@@ -65,4 +65,4 @@ const FormControl: FC<Props> = ({ label, textError, ...props }) => {
   );
 };
 
-export default FormControl;
+export default memo(FormControl);

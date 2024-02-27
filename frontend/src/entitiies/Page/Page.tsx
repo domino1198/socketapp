@@ -1,9 +1,9 @@
-import React, { FC, ReactNode, useMemo } from 'react';
+import React, { FC, memo, ReactNode, useContext, useMemo } from 'react';
 import { ItemMenu } from '../../shared/ui/Menu/types';
 import Layout from '../../shared/ui/Layout';
 import Header from '../../shared/ui/Header';
-import UserMenu from '../../entitiies/UserMenu';
-import { useNavigate } from 'react-router-dom';
+import UserMenu from './components/UserMenu';
+import context from '../../shared/context';
 
 interface Props {
   isAuth?: boolean;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Page: FC<Props> = ({ children, isAuth = false }) => {
-  const navigate = useNavigate();
+  const authContext = useContext(context.AuthContext);
 
   const settings: ItemMenu[] = useMemo(
     () => [
@@ -33,10 +33,7 @@ const Page: FC<Props> = ({ children, isAuth = false }) => {
         title: 'Выйти',
         id: '3',
         action: () => {
-          window.localStorage.removeItem('accessToken');
-          navigate('/auth/sign-in');
-
-          return;
+          authContext?.logOut();
         },
       },
     ],
@@ -63,17 +60,13 @@ const leftItems: ItemMenu[] = [
   {
     title: 'Чаты',
     id: '1',
-    action: () => {
-      return;
-    },
+    link: '/main/chats',
   },
   {
     title: 'Блог',
     id: '2',
-    action: () => {
-      return;
-    },
+    link: '/main/blog',
   },
 ];
 
-export default Page;
+export default memo(Page);

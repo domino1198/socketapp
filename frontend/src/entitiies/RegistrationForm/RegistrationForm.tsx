@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, FC } from 'react';
+import React, { BaseSyntheticEvent, FC, memo } from 'react';
 import {
   Control,
   Controller,
@@ -129,4 +129,4 @@ const RegistrationForm: FC<Props> = ({
   );
 };
 
-export default RegistrationForm;
+export default memo(RegistrationForm);

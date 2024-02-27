@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, FC } from 'react';
+import React, { BaseSyntheticEvent, FC, memo } from 'react';
 import {
   ButtonFormAuthStyled,
   ContainerButtonStyled,
@@ -95,4 +95,4 @@ const AuthForm: FC<Props> = ({
   );
 };
 
-export default AuthForm;
+export default memo(AuthForm);

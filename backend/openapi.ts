@@ -1,5 +1,9 @@
 import { swUserRoute } from "./routes/users";
 import { swLoginRoute } from "./routes/authorization";
+import { swChatsRoute } from "./routes/chats";
+import { ChatSchema } from "./schemas/chat";
+import { UserSchema } from "./schemas/user";
+import { AuthSchema } from "./schemas/auth";
 
 const swagger = {
   openapi: "3.0.0",
@@ -16,67 +20,15 @@ const swagger = {
   ],
   components: {
     schemas: {
-      User: {
-        type: "object",
-        properties: {
-          username: {
-            type: "string",
-          },
-          id: {
-            type: "string",
-          },
-          firstName: {
-            type: "string",
-          },
-          lastName: {
-            type: "string",
-          },
-        },
-      },
-      SignUpRequest: {
-        type: "object",
-        properties: {
-          username: {
-            type: "string",
-          },
-          password: {
-            type: "string",
-          },
-          firstName: {
-            type: "string",
-          },
-          lastName: {
-            type: "string",
-          },
-        },
-      },
-      AuthRequest: {
-        type: "object",
-        properties: {
-          username: {
-            type: "string",
-          },
-          password: {
-            type: "string",
-          },
-        },
-      },
-      AuthResponse: {
-        type: "object",
-        properties: {
-          accessToken: {
-            type: "string",
-          },
-          user: {
-            $ref: "#/components/schemas/User",
-          },
-        },
-      },
+      ...AuthSchema,
+      ...UserSchema,
+      ...ChatSchema,
     },
   },
   paths: {
-    ...swUserRoute,
     ...swLoginRoute,
+    ...swUserRoute,
+    ...swChatsRoute,
   },
 };
 

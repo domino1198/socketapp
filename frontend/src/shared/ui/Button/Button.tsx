@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, memo, ReactNode } from 'react';
 import { Button as ButtonMUI, ButtonProps } from '@mui/material';
 
 interface Props extends ButtonProps {
@@ -13,4 +13,4 @@ const Button: FC<Props> = ({ children, ...props }) => {
   );
 };
 
-export default Button;
+export default memo(Button);
